@@ -1,3 +1,9 @@
+#Papers
+papers/*
+!papers/please
+
+
+links.sql
 History.db
 
 # Byte-compiled / optimized / DLL files
@@ -131,6 +137,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#Papers
-papers/
-links.sql

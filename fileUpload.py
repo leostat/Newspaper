@@ -21,7 +21,7 @@ class paperKid(object):
             rmapyObject.register_device(tokenValue)
             rmapyObject.renew_token()
         else:
-            helpers.debug("Allready authed good to go")
+            helpers.debug("Already auth'd good to go")
             return True
         if rmapyObject.is_auth():
             helpers.ok("Been able to get auth")

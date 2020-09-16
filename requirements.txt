@@ -3,3 +3,4 @@ sumy
 rmapy
 fpdf
 unidecode
+numpy

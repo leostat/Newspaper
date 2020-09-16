@@ -101,6 +101,9 @@ def writeContent(contentList,conn):
         helpers.debug("write failed  : "+str(e))
 
 def enrichContent(contentList):
+
+    import nltk
+    nltk.download('punkt')
     """ Take in list of dict meta object and spit out minified content """
     i = 0
     cur = conn.cursor()
@@ -110,7 +113,7 @@ def enrichContent(contentList):
     # If comes from reddit see if we are able to grab meta author from the site, only use the HTML 5 or authortags
     for item in contentList:
         url = item['URL']
-        helpers.debug(str(item['datePublished']))
+        #helpers.debug(str(item['datePublished']))
         if item['URL']:
             # This block is to reduce network traffic by checking if we allready have the content form the block we are returning
             cur.execute('SELECT summary FROM history where URL = :URL', (item['URL'],))
@@ -197,8 +200,6 @@ def procConf(line, conn, contentList):
     actual content is delt with in enrichContent
     content = {:author,:title,:url,:}
     """
-
-    helpers.debug(line)
     if line[3] == 'json':
         # TODO: each sub should use its own content list which then gets smuched at the end, else it is hella inefficient
         if line[4] == "reddit":
@@ -261,7 +262,7 @@ def run():
     source = cur.fetchall()
     contentList = []
     if not options.noNewContent:
-        helpers.debug("Start w")
+        helpers.debug("Start getting content")
         for line in source:
             helpers.debug("Processing : "+str(line))
             contentList  = procConf(line,conn,contentList)
@@ -321,7 +322,7 @@ if __name__ == "__main__":
                 version="%s: v%s (%s) " % (__prog__, __version__, \
                         ','.join(__authors__), ),
                 description="Daily Newspaper Maker",
-                epilog="Example: newspaper.py -m 10 -p")
+                epilog="Example: newspaper.py -m 10 -u")
 
         parser.add_option("-m", "--max-pages", action="store", dest="maxPages",\
             help="Max pages to generate")
