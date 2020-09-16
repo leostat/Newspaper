@@ -1,0 +1,5 @@
+feedparser
+sumy
+rmapy
+fpdf
+unidecode
