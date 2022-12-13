@@ -249,6 +249,10 @@ def procConf(line, conn, contentList):
 
 def run():
     helpers.ok("Starting")
+
+    if not options.maxPages:
+        options.maxPages = 10
+
     if options.debugging:
         helpers.debug("Debugging requested")
     else:
